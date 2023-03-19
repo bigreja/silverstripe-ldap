@@ -287,6 +287,7 @@ do {
             return null;
         }
         */
+        Debug::Show($this->current);
         return $this->current;
         
     }
