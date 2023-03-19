@@ -119,7 +119,35 @@ final class LDAPIterator implements Iterator
             $baseDn = $ldap->getBaseDn();
         }
         
-        Debug::Show($resource);
+        Debug::Show($ldap);
+        Debug::Show($baseDn);
+        Debug::Show($this->cookie);
+
+        exit();
+        // $link is an LDAP connection
+
+/*
+
+do {
+    $result = ldap_search(
+        $ldap, $baseDn, '(cn=*)', ['cn'], 0, 0, 0, LDAP_DEREF_NEVER,
+        [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'value' => ['size' => $this->getPageSize(), 'cookie' => $this->cookie]]]
+    );
+    ldap_parse_result($link, $result, $errcode , $matcheddn , $errmsg , $referrals, $controls);
+    // To keep the example short errors are not tested
+    $entries = ldap_get_entries($link, $result);
+    foreach ($entries as $entry) {
+        echo "cn: ".$entry['cn'][0]."\n";
+    }
+    if (isset($controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'])) {
+        // You need to pass the cookie from the last call to the next one
+        $this->cookie = $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'];
+    } else {
+        $this->cookie = '';
+    }
+    // Empty cookie means last page
+} while (!empty($cookie));
+*/
 
         //ldap_control_paged_result($resource, $this->getPageSize(), true, $this->cookie);
         if ($this->getReturnAttributes() !== null) {
