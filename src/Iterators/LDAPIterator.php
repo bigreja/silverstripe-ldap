@@ -277,7 +277,7 @@ do {
         return $attributeValue;
     }
 
-    public function current(): mixed
+    /*public function current(): mixed
     {
         if (! is_array($this->current)) {
             $this->rewind();
@@ -286,10 +286,9 @@ do {
             return null;
         }
 
-        return null;
-//        return $this->current;
+        return $this->current;
     }
-
+*/
     public function key(): mixed
     {
         if (! is_array($this->current)) {
