@@ -286,9 +286,9 @@ do {
         if (! is_array($this->current)) {
             return null;
         }
-
-        return $this->current;
         */
+        return $this->current;
+        
     }
 
     public function key(): mixed
