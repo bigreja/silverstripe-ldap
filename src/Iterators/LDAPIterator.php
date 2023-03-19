@@ -6,6 +6,11 @@ use Iterator;
 use Laminas\Ldap\ErrorHandler;
 use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Ldap;
+use Laminas\Ldap\Collection;
+use Laminas\Ldap\Collection\DefaultIterator;
+
+use SilverStripe\Dev\Debug;
+use SilverStripe\Dev\Backtrace;
 
 /**
  * Class LDAPIterator
@@ -113,6 +118,8 @@ final class LDAPIterator implements Iterator
         if (!$baseDn) {
             $baseDn = $ldap->getBaseDn();
         }
+        
+        Debug::Show($resource);
 
         //ldap_control_paged_result($resource, $this->getPageSize(), true, $this->cookie);
         if ($this->getReturnAttributes() !== null) {
