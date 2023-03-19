@@ -8,12 +8,12 @@ use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Extensible;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\LDAP\Iterators\LDAPIterator;
-use Zend\Authentication\Adapter\Ldap as LdapAdapter;
-use Zend\Authentication\AuthenticationService;
-use Zend\Ldap\Exception\LdapException;
-use Zend\Ldap\Filter\AbstractFilter;
-use Zend\Ldap\Ldap;
-use Zend\Stdlib\ErrorHandler;
+use Laminas\Authentication\Adapter\Ldap as LdapAdapter;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Ldap\Exception\LdapException;
+use Laminas\Ldap\Filter\AbstractFilter;
+use Laminas\Ldap\Ldap;
+use Laminas\Stdlib\ErrorHandler;
 use function ldap_control_paged_result;
 
 /**
@@ -35,21 +35,21 @@ class LDAPGateway
     private static $options = [];
 
     /**
-     * @var Zend\Ldap\Ldap
+     * @var Laminas\Ldap\Ldap
      */
     private $ldap;
 
     public function __construct()
     {
         // due to dependency injection this class can be created without any LDAP options set
-        // and \Zend\Ldap\Ldap will throw a warning with an empty array
+        // and \Laminas\Ldap\Ldap will throw a warning with an empty array
         if (count($this->config()->options ?? [])) {
             $this->ldap = new Ldap($this->config()->options);
         }
     }
 
     /**
-     * @return Ldap The underlying Zend\Ldap\Ldap class, so that methods can be called directly
+     * @return Ldap The underlying Laminas\Ldap\Ldap class, so that methods can be called directly
      */
     public function getLdap()
     {
@@ -125,7 +125,7 @@ class LDAPGateway
      *
      * @param string $username
      * @param string $password
-     * @return \Zend\Authentication\Result
+     * @return \Laminas\Authentication\Result
      */
     public function authenticate($username, $password)
     {
@@ -431,7 +431,7 @@ class LDAPGateway
      * @param string $dn Location to update the entry at.
      * @param string $password New password to set.
      * @param string $oldPassword Old password is needed to trigger a password change.
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      * @throws Exception
      */
     public function changePassword($dn, $password, $oldPassword)
@@ -472,7 +472,7 @@ class LDAPGateway
      *
      * @param string $dn Location to update the entry at.
      * @param string $password New password to set.
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      * @throws Exception
      */
     public function resetPassword($dn, $password)
@@ -498,7 +498,7 @@ class LDAPGateway
      *
      * @param string $dn Location to update the entry at.
      * @param array $attributes An associative array of attributes.
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function update($dn, array $attributes)
     {
@@ -510,7 +510,7 @@ class LDAPGateway
      *
      * @param string $dn Location of object to delete
      * @param bool $recursively Recursively delete nested objects?
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function delete($dn, $recursively = false)
     {
@@ -539,7 +539,7 @@ class LDAPGateway
      *
      * @param string $dn Location to add the entry at.
      * @param array $attributes An associative array of attributes.
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function add($dn, array $attributes)
     {
