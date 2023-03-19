@@ -134,7 +134,7 @@ final class LDAPIterator implements Iterator
         $entries = $this->getConvertedEntries($entries);
 
         ErrorHandler::start();
-        $response = "";
+        $response = true;
         // $response = ldap_control_paged_result_response($resource, $resultResource, $this->cookie);
         ErrorHandler::stop();
 
