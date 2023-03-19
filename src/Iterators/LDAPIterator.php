@@ -123,7 +123,7 @@ final class LDAPIterator implements Iterator
         Debug::Show($baseDn);
         Debug::Show($this->cookie);
 
-        exit();
+        //exit();
         // $link is an LDAP connection
 
 /*
