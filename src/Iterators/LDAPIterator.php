@@ -286,7 +286,8 @@ do {
             return null;
         }
 
-        return $this->current;
+        return null;
+//        return $this->current;
     }
 
     public function key(): mixed
